@@ -1,0 +1,234 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#071426">
+    <meta name="description" content="Build your professional resume and portfolio with RESUMORA.">
+    <title>RESUMORA | Resume & Portfolio Builder</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="navbar">
+    <a href="#" class="logo">
+        <span class="logo-icon">R</span>
+        RESUM<span>ORA</span>
+    </a>
+
+    <nav>
+        <button class="nav-btn active" data-page="resume">Resume Builder</button>
+        <button class="nav-btn" data-page="portfolio">Portfolio Builder</button>
+    </nav>
+
+    <div class="nav-right">
+        <span id="saveStatus">Saved</span>
+        <button class="btn btn-secondary" id="resetBtn">Reset</button>
+        <button class="btn btn-primary" id="downloadBtn">Download PDF</button>
+    </div>
+</header>
+
+<main class="container">
+    <section class="hero">
+        <p class="eyebrow">YOUR CAREER STARTS HERE</p>
+        <h1 id="heroTitle">Create Your <span>Professional Resume.</span></h1>
+        <p id="heroText">Build, customize and download your resume in minutes.</p>
+    </section>
+
+    <!-- RESUME BUILDER -->
+    <section id="resumePage" class="workspace">
+        <div class="editor panel">
+            <div class="panel-title">
+                <div><small>RESUME EDITOR</small><h2>Your Information</h2></div>
+                <span class="number">01</span>
+            </div>
+
+            <div class="template-select">
+                <label for="template">Resume Design</label>
+                <select id="template">
+                    <option value="modern">Modern</option>
+                    <option value="classic">Classic</option>
+                    <option value="minimal">Minimal</option>
+                </select>
+            </div>
+
+            <details open class="form-section">
+                <summary>Personal Information</summary>
+                <div class="form-grid">
+                    <label>Full Name<input id="name" placeholder="Your Name"></label>
+                    <label>Job Title<input id="jobTitle" placeholder="Web Developer"></label>
+                    <label>Email<input id="email" type="email" placeholder="you@email.com"></label>
+                    <label>Phone<input id="phone" placeholder="+91 9876543210"></label>
+                    <label>Location<input id="location" placeholder="India"></label>
+                    <label>Website<input id="website" placeholder="https://yourwebsite.com"></label>
+                </div>
+                <label>Professional Summary
+                    <textarea id="summary" rows="4" placeholder="Write your professional summary..."></textarea>
+                </label>
+            </details>
+
+            <details open class="form-section">
+                <summary>Work Experience</summary>
+                <div id="experienceFields"></div>
+                <button class="add-btn" id="addExperience" type="button">+ Add Experience</button>
+            </details>
+
+            <details open class="form-section">
+                <summary>Education</summary>
+                <div id="educationFields"></div>
+                <button class="add-btn" id="addEducation" type="button">+ Add Education</button>
+            </details>
+
+            <details open class="form-section">
+                <summary>Skills</summary>
+                <label>Skills (comma separated)
+                    <textarea id="skills" rows="3" placeholder="HTML, CSS, JavaScript, Python"></textarea>
+                </label>
+            </details>
+
+            <details open class="form-section">
+                <summary>Projects</summary>
+                <div id="projectFields"></div>
+                <button class="add-btn" id="addProject" type="button">+ Add Project</button>
+            </details>
+
+            <details open class="form-section">
+                <summary>Declaration & Signature</summary>
+
+                <label class="check-label">
+                    <input type="checkbox" id="showDeclaration" checked>
+                    Include automatic declaration
+                </label>
+
+                <label>Declaration Text
+                    <textarea id="declarationText" rows="3">I hereby declare that the information provided above is true and correct to the best of my knowledge and belief.</textarea>
+                </label>
+
+                <label class="check-label">
+                    <input type="checkbox" id="showSignature" checked>
+                    Include signature
+                </label>
+
+                <label>Upload Signature Image
+                    <input type="file" id="signatureUpload" accept="image/png,image/jpeg,image/webp">
+                </label>
+
+                <p class="field-hint">Tip: A signature on a plain white background works best. Light background pixels will be made transparent.</p>
+                <button type="button" class="remove-btn" id="removeSignature">Remove Signature</button>
+            </details>
+        </div>
+
+        <div class="preview panel">
+            <div class="panel-title">
+                <div><small>LIVE PREVIEW</small><h2>Your Resume</h2></div>
+                <span class="number">A4</span>
+            </div>
+
+            <article id="resumePaper" class="resume-paper modern">
+                <header class="resume-header">
+                    <h1 id="pName">Your Name</h1>
+                    <h3 id="pJob">Professional Title</h3>
+                    <p id="pContact">Email | Phone | Location</p>
+                </header>
+
+                <section class="resume-section" id="summarySection">
+                    <h2>PROFILE</h2>
+                    <p id="pSummary"></p>
+                </section>
+
+                <section class="resume-section" id="experienceSection">
+                    <h2>EXPERIENCE</h2>
+                    <div id="pExperience"></div>
+                </section>
+
+                <section class="resume-section" id="educationSection">
+                    <h2>EDUCATION</h2>
+                    <div id="pEducation"></div>
+                </section>
+
+                <section class="resume-section" id="skillsSection">
+                    <h2>SKILLS</h2>
+                    <div id="pSkills" class="skill-list"></div>
+                </section>
+
+                <section class="resume-section" id="projectsSection">
+                    <h2>PROJECTS</h2>
+                    <div id="pProjects"></div>
+                </section>
+
+                <section class="resume-section declaration-section" id="declarationSection">
+                    <h2>DECLARATION</h2>
+                    <p id="pDeclaration"></p>
+                    <div class="signature-area" id="signatureArea">
+                        <img id="pSignature" alt="Uploaded signature">
+                        <p id="pSignatureName"></p>
+                        <small>Signature</small>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </section>
+
+    <!-- PORTFOLIO BUILDER -->
+    <section id="portfolioPage" class="workspace hidden">
+        <div class="editor panel">
+            <div class="panel-title">
+                <div><small>PORTFOLIO EDITOR</small><h2>Build Your Portfolio</h2></div>
+                <span class="number">02</span>
+            </div>
+
+            <details open class="form-section">
+                <summary>Personal Details</summary>
+                <label>Portfolio Headline
+                    <input id="portfolioHeadline" placeholder="Designer & Developer">
+                </label>
+                <label>About Me
+                    <textarea id="portfolioAbout" rows="5" placeholder="Tell the world about yourself..."></textarea>
+                </label>
+                <label>Contact Email
+                    <input id="portfolioEmail" type="email" placeholder="you@email.com">
+                </label>
+            </details>
+
+            <details open class="form-section">
+                <summary>Portfolio Projects</summary>
+                <div id="portfolioFields"></div>
+                <button class="add-btn" id="addPortfolio" type="button">+ Add Portfolio Project</button>
+            </details>
+
+            <p class="note">Your portfolio data is saved in your browser. Public publishing will be available in a future update.</p>
+        </div>
+
+        <div class="preview panel">
+            <div class="panel-title">
+                <div><small>LIVE PREVIEW</small><h2>Your Portfolio</h2></div>
+            </div>
+
+            <article class="portfolio-paper">
+                <header class="portfolio-hero">
+                    <p class="eyebrow">HELLO, I'M</p>
+                    <h1 id="ppName">Your Name</h1>
+                    <h2 id="ppHeadline">Designer & Developer</h2>
+                    <p id="ppAbout">Your introduction will appear here.</p>
+                    <a id="ppContact" href="mailto:hello@example.com">Contact Me ↗</a>
+                </header>
+                <section class="portfolio-content">
+                    <p class="eyebrow">MY WORK</p>
+                    <h2>Featured Projects</h2>
+                    <div id="ppProjects" class="portfolio-grid"></div>
+                </section>
+            </article>
+        </div>
+    </section>
+
+    <footer>
+        <p>© <span id="year"></span> RESUMORA</p>
+        <p>CREATE. CUSTOMIZE. GET HIRED.</p>
+    </footer>
+</main>
+
+<script src="script.js" defer></script>
+</body>
+</html>
